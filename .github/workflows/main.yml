@@ -1,0 +1,34 @@
+name: my CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+        
+    - name: Send email
+      uses: dawidd6/action-send-mail@v3.7.1
+      with:
+        # SMTP server address
+        server_address: smtp.gmail.com
+    # SMTP server port
+        server_port: 465
+    # Authenticate as this user to SMTP server
+    # Subject of mail message
+        subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
+    # Recipients mail addresses (separated with comma)
+        to: ${{ github.event.pusher.email }}
+    # Full name of mail sender (might be with an email address specified in <>)
+        from: test
+    # Body of mail message (might be a filename prefixed with file:// to read from)
+        body: test
