@@ -32,6 +32,6 @@ jobs:
     # Recipients mail addresses (separated with comma)
         to: ${{ github.event.pusher.email }}
     # Full name of mail sender (might be with an email address specified in <>)
-        from: test
+        from: tes
     # Body of mail message (might be a filename prefixed with file:// to read from)
         body: ${{ github.event.head_commit.author.email }}
