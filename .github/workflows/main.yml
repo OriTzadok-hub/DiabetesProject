@@ -23,6 +23,9 @@ jobs:
         server_address: smtp.gmail.com
     # SMTP server port
         server_port: 465
+        username: orizadok5@gmail.com
+        password: nqvvmkfnclntbtfd
+
     # Authenticate as this user to SMTP server
     # Subject of mail message
         subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
