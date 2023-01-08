@@ -18,7 +18,7 @@ jobs:
         
     - name: Retrieve version
       run: |
-        echo "USER_ADDRESS=$(git --no-pager show -s --format='%an <%ae>' ${{ github.sha }})" >> $GITHUB_OUTPUT
+        echo "USER_ADDRESS=$(git show --format="%aN <%aE> ${{ github.sha }})" >> $GITHUB_OUTPUT
       id: address
 
         
