@@ -17,10 +17,12 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
-    - name: CINotify Email
-      uses: cinotify/github-action@v1.1.0
+    - name: get email
+      id: test
+      uses: evvanErb/get-github-email-by-username-action@v1.25
       with:
-        to: ${{github.actor}}
-        subject: blabla
-        body: blabla
+        github-username: ${{ github.actor }}
+ 
+    - name: Print the found email
+      run: echo "The email is ${{ steps.test.outputs.email }}" # Example of how to access output email
     
