@@ -16,14 +16,15 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-    - name: echod
-      run: echo "setup success" 
+    - run: echo " Setup DOTNET succeeded"
+
         
     - name: Get user's e-mail
       id: user_email
       run: |
         echo "::set-output name=user_email::$(git log -n 1 --pretty=format:%ae)"
-        
+    - run: echo "got email"
+    
     - name: Send email
       uses: dawidd6/action-send-mail@v3.7.1
       with:
@@ -35,3 +36,4 @@ jobs:
         to: ${{ steps.user_email.outputs.user_email }}
         from: CI-tester
         body: "There was a failure in the action for repository ${{ github.event.repository.name }}."
+    - run: echo"sent email"
