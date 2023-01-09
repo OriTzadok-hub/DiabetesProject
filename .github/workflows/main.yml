@@ -17,12 +17,6 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
-    - name: get email
-      id: get_email
-      uses: evvanErb/get-github-email-by-username-action@v1.25
-      with:
-        github-username: ${{ github.actor }}
-        
     - name: Retrieve version
       run: |
         echo "USER_ADDRESS=$(git log -n 1 --pretty=format:%ae)" >> $GITHUB_OUTPUT
