@@ -17,6 +17,11 @@ jobs:
       with:
         dotnet-version: 6.0.x
         
+    - name: Get user's e-mail
+      id: user_email
+      run: |
+        echo "::set-output name=user_email::$(git log -n 1 --pretty=format:%ae)"
+        
     - name: Send email
       uses: dawidd6/action-send-mail@v3.7.1
       with:
@@ -25,6 +30,6 @@ jobs:
         username: ${{ secrets.EMAIL_USERNAME }}
         password: ${{ secrets.EMAIL_PASSWORD }}
         subject: "Action Failed: ${{ github.event.repository.name }}"
-        to: ${{ github.actor }}
+        to: ${{ steps.user_email.outputs.user_email }}
         from: CI-tester
         body: "There was a failure in the action for repository ${{ github.event.repository.name }}."
