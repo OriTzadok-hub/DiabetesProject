@@ -16,16 +16,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
- 
-    - name: Checks out repository
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0 # You need this to grab all of the branches.
-    - name: Get user's e-mail
-      id: user_email
-      run: |
-        echo "::set-output name=user_email::$(git log -n 1 --pretty=format:%ae)"
-    
+        
     - name: Send email
       uses: dawidd6/action-send-mail@v3.7.1
       with:
@@ -34,6 +25,6 @@ jobs:
         username: ${{ secrets.EMAIL_USERNAME }}
         password: ${{ secrets.EMAIL_PASSWORD }}
         subject: "Action Failed: ${{ github.event.repository.name }}"
-        to: ${{ steps.user_email.outputs.user_email }}
+        to: ${{ github.actor }}
         from: CI-tester
         body: "There was a failure in the action for repository ${{ github.event.repository.name }}."
