@@ -18,11 +18,19 @@ jobs:
         dotnet-version: 6.0.x
 
     - name: get email
-      id: test
+      id: get_email
       uses: evvanErb/get-github-email-by-username-action@v1.25
       with:
         github-username: ${{ github.actor }}
- 
-    - name: Print the found email
-      run: echo "The email is ${{ steps.test.outputs.email }}" # Example of how to access output email
     
+    - name: Send email
+      uses: dawidd6/action-send-mail@v3.7.1
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{ secrets.EMAIL_USERNAME }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: "Action Failed: ${{ github.event.repository.name }}"
+        to: ${{ steps.get_email.outputs.email }}
+        from: CI-tester
+        body: "There was a failure in the action for repository ${{ github.event.repository.name }}."
