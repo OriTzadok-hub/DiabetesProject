@@ -16,18 +16,11 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-        
-    - name: Retrieve version
-      run: |
-        echo "USER_ADDRESS=$(git show --format="%aN <%aE> ${{ github.sha }})" >> $GITHUB_OUTPUT
-      id: address
 
     - name: CINotify Email
       uses: cinotify/github-action@v1.1.0
       with:
         to: ${{github.actor}}
-    # Email subject
         subject: blabla
-    # Email body
         body: blabla
     
