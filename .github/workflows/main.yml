@@ -16,11 +16,12 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-
-    - name: Retrieve version
-      run: |
-        echo git log -n 1 --pretty=format:%ae
-
+ 
+    - name: get email
+      id: test
+      uses: evvanErb/get-github-email-by-username-action@v1.25
+      with:
+        github-username: ${{ github.actor }}
     
     - name: Send email
       uses: dawidd6/action-send-mail@v3.7.1
@@ -30,6 +31,6 @@ jobs:
         username: ${{ secrets.EMAIL_USERNAME }}
         password: ${{ secrets.EMAIL_PASSWORD }}
         subject: "Action Failed: ${{ github.event.repository.name }}"
-        to: ${{ steps.adress.outputs.USER_ADDRESS }}
+        to: ${{ steps.test.outputs.email }}
         from: CI-tester
         body: "There was a failure in the action for repository ${{ github.event.repository.name }}."
