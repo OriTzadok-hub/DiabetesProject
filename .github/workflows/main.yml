@@ -32,5 +32,5 @@ jobs:
         password: ${{ secrets.EMAIL_PASSWORD }}
         subject: "Action Failed: ${{ github.event.repository.name }}"
         to: ${{ steps.get_email.outputs.email }}
-        from: CI-tester
+        from: CI-teste
         body: "There was a failure in the action for repository ${{ github.event.repository.name }}."
