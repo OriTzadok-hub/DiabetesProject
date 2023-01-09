@@ -19,9 +19,7 @@ jobs:
 
     - name: Retrieve version
       run: |
-        echo "USER_ADDRESS=$(git log -n 1 --pretty=format:%ae)" >> $GITHUB_OUTPUT
-        echo "$USER_ADDRESS"
-      id: address
+        echo git log -n 1 --pretty=format:%ae
 
     
     - name: Send email
